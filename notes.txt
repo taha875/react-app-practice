@@ -1,0 +1,67 @@
+React Redux toolkit flow
+npm i react-redux @reduxjs/toolkit
+
+--> createSlice = to separate same state from 2 diff components
+const funcname = createSlice({
+    name:'customerFood',
+    initialState:[],
+    reducers : {
+        add(state,action){
+            state.push(action.payload)
+        }
+    }
+})
+
+Add in state top ^^
+
+- Add provider in App <Provider store={store}/> (import store)
+- make store 
+import {configureStore} from "@redux/toolkit"
+import from slice
+export const store = configureStore({
+    reducer:{
+        nameOfFunc:nameOfFuncReducer (import from feature done beneth \/)
+    }
+})
+
+- Create Slice in feature folder
+import {createSlice,PayloadAction} from "@redux/toolkit"
+
+const initialState = {
+    value =[]
+}
+
+export const reservationSlice = createSlice({
+    name:'nameOfFunc',
+    initialState:[],
+    reducers : {
+        to add
+        add ~(accor to ur func)~ : (state,action : PayloadAction~typescript<string>~)=>{
+            state.value.push(action.payload) ~~pushed data in array
+        }
+        to remove
+         remove ~(accor to ur func)~ : (state,action : PayloadAction~typescript<number>~)=>{
+            state.value.splice(action.payload,1) ~~pushed data in array
+        }
+    }
+
+})
+export const { add(name),remove(name)} = reservationSlice.action ~~~~can export to any file now (line 50)
+export default reservationSlice.reducer
+
+
+
+
+Get data from features
+const (nameofurchoice) = useSelector((state)=>state.nameOfFunc.value)~~~ react redux hook
+
+To add data ~ dispatch hook
+
+const dispatch = useDispatch()
+dispatch(add~~(name acc to u)~~(stateName))
+
+To Remove data
+- goto reducer and call method
+const dispatch = useDispatch()
+dispatch(remove~~(name acc to u)~~(stateName)) add directly if index or function
+
