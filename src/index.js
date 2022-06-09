@@ -8,13 +8,16 @@ import TodoList from "./components/todoList/Index";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
+import { ApiProvider } from "@reduxjs/toolkit/dist/query/react";
+import { RickAndMorty } from "./app/RickandMorty";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const client = new QueryClient();
 
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={client}>
-      <Provider store={store}>
+      <ApiProvider api={RickAndMorty}>
+        {/* <Provider store={store}> */}
         <BrowserRouter>
           <nav>
             <ul className="flex items-center justify-center gap-x-4 py-6">
@@ -37,7 +40,8 @@ root.render(
             {/* </Route> */}
           </Routes>
         </BrowserRouter>
-      </Provider>
+        {/* </Provider> */}
+      </ApiProvider>
     </QueryClientProvider>
   </React.StrictMode>
 );
