@@ -1,4 +1,4 @@
-// create custom hook
+// create custom hook for React Query
 import { useQuery } from "react-query";
 function useListData() {
   const postsData = async () => {

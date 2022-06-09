@@ -1,0 +1,107 @@
+- Make api folder
+- Make api slice
+  createApi, fetchBaseQuery from "@reduxjs/toolkit/query/react"
+
+  export const appSlice = createApi({
+    reducerPath:"api", ~~~~~~ just the reducer path
+    baseQuery : fetchBaseQuery({baseUrl : 'blahbla'}), ~~~~fetch base qury
+    tagTypes:['Todos']
+    endpoints:(builder)=>({ ~~~~~ redux builder
+
+            GET TODOS     
+            getTodos : builder.query({
+            qurey:()=>'todos' ~~~~~ default query
+            providesTags:['Todos'] ~~~~~ tags to provide
+            }),
+
+            ADD TODO
+            addTodo:builder.mutation({
+                query:(todo)=>({
+                    url:'/todos',
+                    method:'POST',
+                    body:todo
+                }),
+                invalidatesTags:['Todos']
+            }),
+
+            UPDATE TODO
+            updateTodo:builder.mutation({
+                query:(todo)=>({
+                    url:'/todos/${todo.id}',
+                    method:'PATCH/PUT',
+                    body:todo
+                }),
+                invalidatesTags:['Todos']
+            }),
+
+            DELETE TODO
+            deleteTodo:builder.mutation({
+                query:(id)=>({
+                    url:'/todos/${id}',
+                    method:'DELETE',
+                    body:id
+                }),
+                invalidatesTags:['Todos']
+            })
+        })
+
+  })
+  export const{
+  useGetTodosQuery , useAddTodoMutation, useUpdateTodoMutation, useDeleteTodoMutation ~~~~~ name based upon func
+  } = apiSlice
+
+- goto App
+  import {ApiProvider} from "@reduxjs/toolkit/query/react"
+  import {apiSlice} from "apislice--folder"
+  <ApiProvide api={apiSlice}>
+
+-goto folder
+import useGetTodosQuery , useAddTodoMutation, useUpdateTodoMutation, useDeleteTodoMutation
+-in func
+const {
+data:
+todos, ~~~~~ renaming data
+isLoading,
+error,
+isError,
+isSuccess
+
+    } = useGetTodosQuery()
+    const [addTodo] = useAddTodoMutation()
+    const [updateTodo] = useUpdateTodoMutation()
+    const [deleteTodo] = useDeleteTodoMutation() ~~~~ just gets the fucntion to do to data
+
+
+    <!-- to ADD -->
+    addTodo({
+        title: 'blah',
+        description: 'blah',
+        completed: false
+    })
+
+    <!-- to UPDATE -->
+    updateTodo({
+        id: 1,
+        title: 'blah',
+        description: 'blah',
+        completed: false
+    })
+
+    <!-- to DELETE -->
+    deleteTodo(1)
+
+    CODE EXAMPLE:
+    <article key={todo.id}>
+        <div className="todo">
+            <input
+                type="checkbox"
+                checked={todo.completed}
+                id={todo.id}
+                onChange={() => updateTodo({ ...todo, completed: !todo.completed })}
+            />
+            <label htmlFor={todo.id}>{todo.title}</label>
+        </div>
+        <button className="trash" onClick={() => deleteTodo({ id: todo.id })}>
+            <FontAwesomeIcon icon={faTrash} />
+        </button>
+    </article>
