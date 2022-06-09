@@ -44,7 +44,7 @@ function UpdateModal({ click, index, prevTask, prevDescription }) {
             <Input value={task} change={(e) => setTask(e.target.value)} customClass={`mb-4`} label={"Task"} placeholder={prevTask} />
             <Input value={description} change={(e) => setDescription(e.target.value)} label={"Description"} placeholder={prevDescription} />
             <button onClick={handleGetData} className="hover:bg-neutral-900 bg-neutral-800 w-full py-3 text-base mt-6 focus:outline-none font-semibold text-white rounded-md">
-              Add To Do
+              Update
             </button>
           </div>
         </div>
