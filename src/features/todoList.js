@@ -8,10 +8,16 @@ export const todoListSlice = createSlice({
   initialState: initalState,
   reducers: {
     addTodo: (state, action) => {
-      console.log(action.payload, "action.payload");
       state.todoList.push(action.payload);
+    },
+    removeTodo: (state, action) => {
+      state.todoList.splice(action.payload, 1);
+    },
+    // update datat
+    updateTodo: (state, action) => {
+      state.todoList[action.payload.index] = action.payload.data;
     },
   },
 });
-export const { addTodo } = todoListSlice.actions;
+export const { addTodo, removeTodo, updateTodo } = todoListSlice.actions;
 export default todoListSlice.reducer;
