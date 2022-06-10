@@ -16,8 +16,8 @@ const client = new QueryClient();
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={client}>
-      <ApiProvider api={RickAndMorty}>
-        {/* <Provider store={store}> */}
+      {/* <ApiProvider api={RickAndMorty}> */}
+        <Provider store={store}>
         <BrowserRouter>
           <nav>
             <ul className="flex items-center justify-center gap-x-4 py-6">
@@ -40,8 +40,8 @@ root.render(
             {/* </Route> */}
           </Routes>
         </BrowserRouter>
-        {/* </Provider> */}
-      </ApiProvider>
+        </Provider>
+      {/* </ApiProvider> */}
     </QueryClientProvider>
   </React.StrictMode>
 );
