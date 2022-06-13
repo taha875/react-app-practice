@@ -1,26 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Input from "../reusableUI/input/input";
-import { useSelector, useDispatch } from "react-redux";
-import { updateTodo, addTodo } from "../../features/todoList";
+import { useDispatch } from "react-redux";
+import { updateTodo } from "../../features/todoList";
 import Cross from "../../svg/cross";
 function UpdateModal({ click, index, prevTask, prevDescription }) {
   const [task, setTask] = React.useState("");
   const [description, setDescription] = React.useState("");
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   console.log(task, description, index);
-  // });
   const handleGetData = (e) => {
     console.log(index);
-
-    // dispatch(
-    //   updateTodo({
-    //     title: task,
-    //     description: description,
-    //   })
-    // );
-    // update
     dispatch(
       updateTodo({
         index: index,

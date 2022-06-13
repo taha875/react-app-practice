@@ -1,6 +1,6 @@
 import React from "react";
 import Input from "../reusableUI/input/input";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addTodo } from "../../features/todoList";
 import Cross from "../../svg/cross";
 function InputModal({ click }) {
