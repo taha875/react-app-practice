@@ -3,7 +3,6 @@ import { useGetCharacterQuery } from "../../app/RickandMorty";
 function Index() {
   const { data: character, isLoading, error, isError, isSuccess } = useGetCharacterQuery();
   let dataOFCharacter = character;
-  console.log(dataOFCharacter);
   const renderData = () => {
     if (isLoading) {
       return <div>Loading...</div>;
