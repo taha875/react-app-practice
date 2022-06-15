@@ -12,17 +12,30 @@ export const Characters = createApi({
       method: "GET",
       providesTags: ["users"],
     }),
+
     addCharacter: builder.mutation({
-      query: () => ({
+      query: ({ body }) => ({
         url: "/",
         method: "POST",
-        body: (data) => ({
-          name: data.name,
-          description: data.description,
-        }),
+        body,
       }),
       invalidatesTags: ["users"],
     }),
+    deleteCharacter: builder.mutation({
+      query: ({ id }) => ({
+        url: "/",
+        method: "DELETE",
+        body: { id },
+      }),
+      invalidatesTags: ["users"],
+    }),
+    updateCharacter: builder.mutation({
+      query: ({ id, body }) => ({
+        url: "/",
+        method: "PATCH",
+        body: { id, ...body },
+      }),
+    }),
   }),
 });
-export const { useGetCharacterQuery,useAddCharacterMutation } = Characters;
+export const { useGetCharacterQuery, useAddCharacterMutation, useDeleteCharacterMutation, useUpdateCharacterMutation } = Characters;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useGetCharacterQuery, useAddCharacterMutation } from "../../app/Characters";
+import { useGetCharacterQuery, useAddCharacterMutation, useDeleteCharacterMutation, useUpdateCharacterMutation } from "../../app/Characters";
 import AddUserModal from "../reusableUI/input/modal/Modal";
 
 function UserData() {
@@ -7,12 +7,20 @@ function UserData() {
   // const [addCharacter] = useGetCharacterQuery();
   // get add character mutation
   const [addCharacter] = useAddCharacterMutation();
+  // get delete character mutation
+  const [deleteCharacter] = useDeleteCharacterMutation();
+  // get update character mutation
+  const [updateCharacter] = useUpdateCharacterMutation();
   const [addUserModal, setAddUserModal] = useState(false);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const addUserHandler = () => {
-    addCharacter(name, description);
-    console.log(users);
+    addCharacter({
+      body: {
+        name,
+        description,
+      },
+    });
   };
   const renderUser = () => {
     return (
