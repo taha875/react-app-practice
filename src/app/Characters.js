@@ -35,6 +35,7 @@ export const Characters = createApi({
         method: "PATCH",
         body: { id, ...body },
       }),
+      invalidatesTags: ["users"],
     }),
   }),
 });
